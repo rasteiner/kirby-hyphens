@@ -1,4 +1,4 @@
-# Kirby 3 Hyphens Plugin
+# Kirby 3 / 4 Hyphens Plugin
 
 This is a plugin for Kirby 3 and 4 that provides automatic hyphenation for your text content. It uses the [Vanderlee PHP Syllable library](https://github.com/vanderlee/phpSyllable) to perform hyphenation.
 
