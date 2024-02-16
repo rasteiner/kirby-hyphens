@@ -4,7 +4,7 @@
   "description": "A Kirby field method to add automatic hyphenation to text.",
   "version": "1.0.0",
   "require": {
-    "vanderlee/syllable": "^1.7"
+    "vanderlee/syllable": "^1.7",
     "php": ">=8.1.0",
     "getkirby/composer-installer": "^1.2"
   },
