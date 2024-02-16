@@ -27,7 +27,7 @@ The plugin provides a `hyphenate` field method that you can use in your template
     <?= $page->title()->html()->hyphenate(
         minWordLength: 5,
         html: true,
-        language: 'en',
+        language: 'en-us',
         hyphen: '&shy;',
     ); ?>
 </h1>
