@@ -1,6 +1,8 @@
 {
-  "name": "roman/kirby-hyphens",
+  "name": "rasteiner/kirby-hyphens",
   "type": "kirby-plugin",
+  "description": "A Kirby field method to add automatic hyphenation to text.",
+  "version": "1.0.0",
   "require": {
     "vanderlee/syllable": "^1.7"
   },
