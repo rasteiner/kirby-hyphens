@@ -61,7 +61,7 @@ return [
     // Map Kirby language codes to TeX hyphenation dictionary codes, since they don't always match.
     // see https://hyphenation.org/#languages for available codes.
     // default: [ 'en' => 'en-gb' ]
-    'rasteiner.kirby-hyphens.language-map' => [ 'de' => 'de-ch' ],
+    'rasteiner.kirby-hyphens.language-map' => [ 'de' => 'de-ch-1901' ],
 
     // hyphenation character to insert into the text
     // default is the soft hyphen character (&shy; in HTML)
