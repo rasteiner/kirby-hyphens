@@ -1,0 +1,19 @@
+{
+  "name": "roman/kirby-hyphens",
+  "type": "kirby-plugin",
+  "require": {
+    "vanderlee/syllable": "^1.7"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "rasteiner\\KirbyHyphens\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Roman Steiner",
+      "email": "roman@toastlab.ch"
+    }
+  ]
+}
