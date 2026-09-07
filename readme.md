@@ -1,6 +1,6 @@
-# Kirby 3 / 4 Hyphens Plugin
+# Kirby 3+ Hyphens Plugin
 
-This is a plugin for Kirby 3 and 4 that provides automatic hyphenation for your text content. It uses the [Vanderlee PHP Syllable library](https://github.com/vanderlee/phpSyllable) to perform hyphenation.
+This is a plugin for Kirby 3+ that provides automatic hyphenation for your text content. It uses the [Vanderlee PHP Syllable library](https://github.com/vanderlee/phpSyllable) to perform hyphenation.
 
 ## Installation
 
@@ -29,6 +29,8 @@ The plugin provides a `hyphenate` field method that you can use in your template
         html: true,
         language: 'en-us',
         hyphen: '&shy;',
+        minHyphenLeft: 3,
+        minHyphenRight: 3,
     ); ?>
 </h1>
 ```
@@ -67,6 +69,14 @@ return [
     // default is the soft hyphen character (&shy; in HTML)
     'rasteiner.kirby-hyphens.hyphen' => '-',
 
+    // Override minimum number of characters from start of word to
+    // retain before hyphenation point (default varies by language)
+    'minHyphenLeft' => null,
+    
+    // Override minimum number of characters from end of word to
+    // retain after hyphenation point (default varies by language)
+    'minHyphenRight' => null,
+    
     // enable cache for compiled hyphenation patterns
     // default is true
     'rasteiner.kirby-hyphens.cache' => true,
