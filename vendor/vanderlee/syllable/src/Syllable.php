@@ -54,6 +54,7 @@ class Syllable
     private $patterns = null;
     private $maxPattern = null;
     private $hyphenation = null;
+    private $userHyphenations = array();
 
     /**
      * Character encoding to use.
@@ -138,6 +139,19 @@ class Syllable
     }
 
     /**
+     * Add custom hyphenation patterns for words using a '-' to explicitly specify hyphenation (if any)
+     * @param array $hyphenations
+     * @return void
+     */
+    public function addHyphenations(array $hyphenations)
+    {
+        foreach ($hyphenations as $pattern) {
+            $word = str_replace('-', '', $pattern);
+            $this->userHyphenations[$word] = $pattern;
+        }
+    }
+
+    /**
      * Set the hyphen text or object to use as a hyphen marker.
      *
      * @param mixed $hyphen either a Syllable_Hyphen_Interface or a string, which is turned into a Syllable_Hyphen_Text
@@ -162,7 +176,7 @@ class Syllable
     /**
      * @param Cache $cache
      */
-    public function setCache(Cache $cache = null)
+    public function setCache(?Cache $cache = null)
     {
         $this->cache = $cache;
     }
@@ -598,8 +612,8 @@ class Syllable
      */
     private function hyphenateHtmlDom(
         DOMNode $node,
-        DOMNodeList $excludeNodes = null,
-        DOMNodeList $includeNodes = null,
+        ?DOMNodeList $excludeNodes = null,
+        ?DOMNodeList $includeNodes = null,
         $split = true
     ) {
         if ($node->hasChildNodes()) {
@@ -755,18 +769,19 @@ class Syllable
 
         $wordLowerCased = mb_strtolower($word);
 
-        if (isset($this->hyphenation[$wordLowerCased])) {
-            return $this->parseWordByHyphenation($word, $wordLowerCased);
-        } else {
-            return $this->parseWordByPatterns($word, $wordLength, $wordLowerCased);
+        if (isset($this->userHyphenations[$wordLowerCased])) {
+            return $this->parseWordByHyphenation($this->userHyphenations[$wordLowerCased], $word, $wordLowerCased);
         }
+
+        if (isset($this->hyphenation[$wordLowerCased])) {
+            return $this->parseWordByHyphenation($this->hyphenation[$wordLowerCased], $word, $wordLowerCased);
+        }
+
+        return $this->parseWordByPatterns($word, $wordLength, $wordLowerCased);
     }
 
-    private function parseWordByHyphenation($word, $wordLowerCased = null)
+    private function parseWordByHyphenation($hyphenation, $word, $wordLowerCased = null)
     {
-        $wordLowerCased = $wordLowerCased ?: mb_strtolower($word);
-
-        $hyphenation = $this->hyphenation[$wordLowerCased];
         $hyphenationLength = mb_strlen($hyphenation);
 
         $parts = [];
