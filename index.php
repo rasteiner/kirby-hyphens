@@ -30,6 +30,12 @@ Kirby::plugin('rasteiner/kirby-hyphens', [
         // Hyphenation character to use
         'hyphen' => new Soft,
 
+        // Minimum number of characters from start of word to retain before hyphenation point
+        'minHyphenLeft' => null,
+
+        // Minimum number of characters from end of word to retain after hyphenation point
+        'minHyphenRight' => null,
+
         // Enable cache for compiled hyphenation patterns
         'cache' => true,
     ],
@@ -45,6 +51,8 @@ Kirby::plugin('rasteiner/kirby-hyphens', [
             $minWordLength ??= option('rasteiner.kirby-hyphens.minWordLength');
             $html ??= option('rasteiner.kirby-hyphens.html');
             $hyphen ??= option('rasteiner.kirby-hyphens.hyphen');
+            $minHyphenLeft ??= option('rasteiner.kirby-hyphens.minHyphenLeft');
+            $minHyphenRight ??= option('rasteiner.kirby-hyphens.minHyphenRight');
 
             if(isset($hyphenator[$language])) {
                 $syllable = $hyphenator[$language];
@@ -57,6 +65,8 @@ Kirby::plugin('rasteiner/kirby-hyphens', [
             
             $syllable->setHyphen($hyphen);
             $syllable->setMinWordLength($minWordLength);
+            $syllable->setMinHyphenLeft($minHyphenLeft);
+            $syllable->setMinHyphenRight($minHyphenRight);
 
             $field->value = $html ? $syllable->hyphenateHtmlText($field->value) : $syllable->hyphenateText($field->value);
             return $field;
